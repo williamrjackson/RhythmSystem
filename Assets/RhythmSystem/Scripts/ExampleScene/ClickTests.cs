@@ -37,14 +37,17 @@ public class ClickTests : MonoBehaviour {
     private IEnumerator SpawnAndMoveAndDestroy()
     {
         GameObject go = Instantiate(instantiatePrefab);
-        go.transform.position = Vector3.zero + Vector3.up * 5;
+        float rightOffset = UnityEngine.Random.Range(-3, 3);
+        Vector3 initialPos = Vector3.zero + Vector3.up * 5 + Vector3.forward * 20 + Vector3.right * rightOffset;
+        Vector3 targetPos = Vector3.zero + Vector3.right * rightOffset;
+        go.transform.position = initialPos;
         go.transform.parent = transform;
         float offset = RhythmTracker.instance.GetOffset();
         float elapsedTime = 0;
         while (elapsedTime < offset)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            go.transform.position = Vector3.zero + Vector3.up * Mathf.Lerp(5, 0, Mathf.InverseLerp(0, offset, elapsedTime));
+            go.transform.position = Vector3.Lerp(initialPos, targetPos, Mathf.InverseLerp(0, offset, elapsedTime));
             yield return new WaitForEndOfFrame();
         }
         Destroy(go);

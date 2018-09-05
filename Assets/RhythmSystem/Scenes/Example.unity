@@ -810,7 +810,7 @@ Prefab:
     - target: {fileID: 114615432171274450, guid: 616ad1df6f5bb4840b1c3961b06bd7df,
         type: 2}
       propertyPath: m_AdvancedNotificationOffset
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 114615432171274450, guid: 616ad1df6f5bb4840b1c3961b06bd7df,
         type: 2}
