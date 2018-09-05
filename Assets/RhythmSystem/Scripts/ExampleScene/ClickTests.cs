@@ -21,12 +21,12 @@ public class ClickTests : MonoBehaviour {
         m_AudioSource = GetComponent<AudioSource>();
 	}
     
-    private void Spawn()
+    private void Spawn(int beatIndex)
     {
         StartCoroutine(SpawnAndMoveAndDestroy());
     }
 
-    private void Trigger()
+    private void Trigger(int beatIndex)
     {
         m_AudioSource.PlayOneShot(oneShot);
 

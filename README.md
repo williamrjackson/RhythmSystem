@@ -14,9 +14,10 @@ public class Test : MonoBehaviour
     }
 
     // This will run on every eighth note at 140bpm;
-    private void Trigger()
+    private void Trigger(int beatIndex)
     {
         GetComponent<AudioSource>().Play();
+        print("Beat Index: " + beatIndex.ToString());
     }
 }
 ```

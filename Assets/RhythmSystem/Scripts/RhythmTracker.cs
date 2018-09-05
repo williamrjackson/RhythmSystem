@@ -23,19 +23,20 @@ public class RhythmTracker : MonoBehaviour {
 
     public enum TriggerTiming { Thirtyseconds, Sixteenths, Eighths, Quarters, Halves, Wholes };
 
-    public UnityAction On32nd;
-    public UnityAction On16th;
-    public UnityAction On8th;
-    public UnityAction OnQuarter;
-    public UnityAction OnHalf;
-    public UnityAction OnWhole;
+    public delegate void OnBeatDelegate(int beatIndex);
+    public OnBeatDelegate On32nd;
+    public OnBeatDelegate On16th;
+    public OnBeatDelegate On8th;
+    public OnBeatDelegate OnQuarter;
+    public OnBeatDelegate OnHalf;
+    public OnBeatDelegate OnWhole;
 
-    public UnityAction OnAdvanced32nd;
-    public UnityAction OnAdvanced16th;
-    public UnityAction OnAdvanced8th;
-    public UnityAction OnAdvancedQuarter;
-    public UnityAction OnAdvancedHalf;
-    public UnityAction OnAdvancedWhole;
+    public OnBeatDelegate OnAdvanced32nd;
+    public OnBeatDelegate OnAdvanced16th;
+    public OnBeatDelegate OnAdvanced8th;
+    public OnBeatDelegate OnAdvancedQuarter;
+    public OnBeatDelegate OnAdvancedHalf;
+    public OnBeatDelegate OnAdvancedWhole;
 
     void Awake()
     {
@@ -127,32 +128,32 @@ public class RhythmTracker : MonoBehaviour {
     private void Hit(int index)
     {
         if (On32nd != null)
-            On32nd();
+            On32nd(index);
         if (index % 2 == 0 && On16th != null)
-            On16th();
+            On16th(index);
         if (index % 4 == 0 && On8th != null)
-            On8th();
+            On8th(index);
         if (index % 8 == 0 && OnQuarter != null)
-            OnQuarter();
+            OnQuarter(index);
         if (index % 16 == 0 && OnHalf != null)
-            OnHalf();
+            OnHalf(index);
         if (index == 0 && OnWhole != null)
-            OnWhole();
+            OnWhole(index);
     }
     private void AdvancedHit(int index)
     {
         if (OnAdvanced32nd != null)
-            OnAdvanced32nd();
+            OnAdvanced32nd(index);
         if (index % 2 == 0 && OnAdvanced16th != null)
-            OnAdvanced16th();
+            OnAdvanced16th(index);
         if (index % 4 == 0 && OnAdvanced8th != null)
-            OnAdvanced8th();
+            OnAdvanced8th(index);
         if (index % 8 == 0 && OnAdvancedQuarter != null)
-            OnAdvancedQuarter();
+            OnAdvancedQuarter(index);
         if (index % 16 == 0 && OnAdvancedHalf != null)
-            OnAdvancedHalf();
+            OnAdvancedHalf(index);
         if (index == 0 && OnAdvancedWhole != null)
-            OnAdvancedWhole();
+            OnAdvancedWhole(index);
     }
 
     public float GetOffset()
@@ -247,7 +248,7 @@ public class RhythmTracker : MonoBehaviour {
 
 
     // Public Subscription methods for convenience
-    public void Subscribe(UnityAction subscriber, TriggerTiming triggerTiming, bool advanced = false)
+    public void Subscribe(OnBeatDelegate subscriber, TriggerTiming triggerTiming, bool advanced = false)
     {
         if (advanced)
         {
@@ -322,7 +323,7 @@ public class RhythmTracker : MonoBehaviour {
             }
         }
     }
-    public void Unsubscribe(UnityAction subscriber, TriggerTiming triggerTiming, bool advanced = false)
+    public void Unsubscribe(OnBeatDelegate subscriber, TriggerTiming triggerTiming, bool advanced = false)
     {
         if (advanced)
         {
