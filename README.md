@@ -2,9 +2,23 @@
 
 Basic notification-based rhythm system for Unity.
 
-Add a guide loop to the RhythmTracker prefab's AudioSource and specify how many subdivisions you want. For each subdivision, a `UnityAction` is raised, as well as one for every other, fourth, eighth, etc.
+Add the RhythmSystem component to a GameObject and subscribe from other scripts:
 
-To achieve tempo changes, use a 100bpm loop, and manipulate it's speed value.  
-1.00 = 100bpm  
-1.20 = 120bpm  
-.90 = 90bpm, and so on.
+```C#
+public class Test : MonoBehaviour 
+{
+    private void Start()
+    {
+        RhythmTracker.instance.SetTempo(140);
+        RhythmTracker.instance.Subscribe(Trigger, RhythmTracker.TriggerTiming.Eighths);
+    }
+
+    // This will run on every eighth note at 140bpm;
+    private void Trigger()
+    {
+        GetComponent<AudioSource>().Play();
+    }
+}
+```
+
+You can also set on offset, to get advance notifications of beats, in addition to the beats themselves.
