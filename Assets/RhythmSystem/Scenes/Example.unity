@@ -279,7 +279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &400303336
 AudioSource:
   m_ObjectHideFlags: 0
@@ -572,6 +572,66 @@ MonoBehaviour:
     type: 2}
   oneShot: {fileID: 8300000, guid: ba45edf1066931a46981df28eb0c7f85, type: 3}
   triggerTiming: 2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.25
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.08169699
+      value: 0.41533244
+      inSlope: 1.5615969
+      outSlope: 1.5615969
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.28983817
+      value: 0.22529584
+      inSlope: -2.8086214
+      outSlope: -2.8086214
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33063558
+    - serializedVersion: 3
+      time: 0.35012498
+      value: 0.032672398
+      inSlope: 5.6620193
+      outSlope: 5.6620193
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.103801325
+    - serializedVersion: 3
+      time: 0.7503289
+      value: 0.98077327
+      inSlope: -0.6917325
+      outSlope: -0.6917325
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.64953905
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   countText: {fileID: 1289749837}
 --- !u!82 &1511084115
 AudioSource:
@@ -817,6 +877,15 @@ Prefab:
       propertyPath: m_PlaybackAudioSource
       value: 
       objectReference: {fileID: 400303336}
+    - target: {fileID: 1190919294765776, guid: 616ad1df6f5bb4840b1c3961b06bd7df, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114615432171274450, guid: 616ad1df6f5bb4840b1c3961b06bd7df,
+        type: 2}
+      propertyPath: m_InitialTempo
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 616ad1df6f5bb4840b1c3961b06bd7df, type: 2}
   m_IsPrefabAsset: 0

@@ -8,6 +8,7 @@ public class ClickTests : MonoBehaviour {
     public GameObject instantiatePrefab;
     public AudioClip oneShot;
     public RhythmTracker.TriggerTiming triggerTiming;
+    public AnimationCurve curve;
     public UnityEngine.UI.Text countText;
     private int count = 0;
 
@@ -15,7 +16,7 @@ public class ClickTests : MonoBehaviour {
 
     void Start ()
     {        
-        RhythmTracker.instance.Subscribe(Spawn, RhythmTracker.TriggerTiming.Eighths, true);
+        RhythmTracker.instance.Subscribe(Spawn, triggerTiming, true);
         RhythmTracker.instance.Subscribe(Trigger, triggerTiming, false);
 
         m_AudioSource = GetComponent<AudioSource>();
@@ -37,17 +38,19 @@ public class ClickTests : MonoBehaviour {
     private IEnumerator SpawnAndMoveAndDestroy()
     {
         GameObject go = Instantiate(instantiatePrefab);
-        float rightOffset = UnityEngine.Random.Range(-3, 3);
-        Vector3 initialPos = Vector3.zero + Vector3.up * 5 + Vector3.forward * 20 + Vector3.right * rightOffset;
-        Vector3 targetPos = Vector3.zero + Vector3.right * rightOffset;
-        go.transform.position = initialPos;
+        float rightOffset = UnityEngine.Random.Range(-4, 4);
+        Vector3 targetPos = Vector3.zero + Vector3.forward * -4 + Vector3.right * rightOffset + Vector3.up * -1f;
         go.transform.parent = transform;
         float offset = RhythmTracker.instance.GetOffset();
         float elapsedTime = 0;
         while (elapsedTime < offset)
         {
+            float t = Mathf.InverseLerp(0, offset, elapsedTime);
+            float inverseT = Mathf.InverseLerp(offset, 0, elapsedTime);
+            Vector3 currentPos = targetPos + Vector3.up * 5 * curve.Evaluate(t) + 
+                Vector3.forward * 20 * inverseT;
+            go.transform.position = currentPos;
             elapsedTime += Time.unscaledDeltaTime;
-            go.transform.position = Vector3.Lerp(initialPos, targetPos, Mathf.InverseLerp(0, offset, elapsedTime));
             yield return new WaitForEndOfFrame();
         }
         Destroy(go);
