@@ -5,50 +5,45 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 
 public class ClickTests : MonoBehaviour {
-    public GameObject instantiatePrefab;
-    public AudioClip oneShot;
-    public RhythmTracker.TriggerTiming triggerTiming;
+    public GameObject rightPrefab;
+    public GameObject leftPrefab;
+    public RhythmPattern pattern;
     public AnimationCurve curve;
-    public UnityEngine.UI.Text countText;
-    private int count = 0;
+    private int count = -1;
 
-    private AudioSource m_AudioSource;
-
+    private RhythmTracker.TriggerTiming triggerTiming;
     void Start ()
-    {        
+    {
+        triggerTiming = pattern.timing;
         RhythmTracker.instance.Subscribe(Spawn, triggerTiming, true);
-        RhythmTracker.instance.Subscribe(Trigger, triggerTiming, false);
-
-        m_AudioSource = GetComponent<AudioSource>();
 	}
     
     private void Spawn(int beatIndex)
     {
-        StartCoroutine(SpawnAndMoveAndDestroy());
+        count++;
+        foreach(RhythmPatternEvent e in pattern.events)
+        {
+            if (e.hitIndex == count % 16 && e.side != RhythmPatternEvent.Side.None)
+                StartCoroutine(SpawnAndMoveAndDestroy(e));
+        }
     }
 
-    private void Trigger(int beatIndex)
+    private IEnumerator SpawnAndMoveAndDestroy(RhythmPatternEvent e)
     {
-        m_AudioSource.PlayOneShot(oneShot);
-
-        countText.text = (count + 1).ToString();
-        count = (count + 1) % 4;
-    }
-
-    private IEnumerator SpawnAndMoveAndDestroy()
-    {
+        float x = Mathf.Lerp(-5, 5, e.position.x);
+        float y = Mathf.Lerp(5, 0, e.position.y);
+        GameObject instantiatePrefab = e.hand == RhythmPatternEvent.Hand.Right ? rightPrefab : leftPrefab;
         GameObject go = Instantiate(instantiatePrefab);
-        float rightOffset = UnityEngine.Random.Range(-4, 4);
-        Vector3 targetPos = Vector3.zero + Vector3.forward * -4 + Vector3.right * rightOffset + Vector3.up * -1f;
         go.transform.parent = transform;
+        Vector3 targetPos = Vector3.zero  + Vector3.right * x;
         float offset = RhythmTracker.instance.GetOffset();
         float elapsedTime = 0;
         while (elapsedTime < offset)
         {
             float t = Mathf.InverseLerp(0, offset, elapsedTime);
             float inverseT = Mathf.InverseLerp(offset, 0, elapsedTime);
-            Vector3 currentPos = targetPos + Vector3.up * 5 * curve.Evaluate(t) + 
-                Vector3.forward * 20 * inverseT;
+            Vector3 currentPos = targetPos + Vector3.up * y * curve.Evaluate(t) + 
+                Vector3.forward * 40 * inverseT;
             go.transform.position = currentPos;
             elapsedTime += Time.unscaledDeltaTime;
             yield return new WaitForEndOfFrame();
@@ -59,6 +54,5 @@ public class ClickTests : MonoBehaviour {
     private void OnDisable()
     {
         RhythmTracker.instance.Unsubscribe(Spawn, triggerTiming, true);
-        RhythmTracker.instance.Unsubscribe(Trigger, triggerTiming, false);
     }
 }

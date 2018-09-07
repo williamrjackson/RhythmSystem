@@ -6,13 +6,20 @@ using UnityEngine.Events;
 public class RhythmTracker : MonoBehaviour {
     public static RhythmTracker instance;
     [SerializeField]
+    [Tooltip("Desired tempo in bpm")]
     private float m_InitialTempo = 120;
     [SerializeField]
+    [Tooltip("Sends notification of beats by this much time in advance.")]
     private float m_AdvancedNotificationOffset = 0;
     [SerializeField]
+    [Tooltip("Start Playing right away. Not actually on Awake, but on the first frame.")]
     private bool m_PlayOnAwake = true;
     [SerializeField]
+    [Tooltip("AudioSource for the music you're playing along to. Optional")]
     private AudioSource m_PlaybackAudioSource;
+    [SerializeField]
+    [Tooltip("Useful for lead-ins and intros")]
+    private float m_PrerollTime = 0;
     private AudioSource m_LoopAudioSource;
     private AudioSource m_OffsetAudioSource;
     private int m_SubDivisions = 32;
@@ -180,7 +187,7 @@ public class RhythmTracker : MonoBehaviour {
     {
         if (!m_IsPaused)
         {
-            StartCoroutine(StartPlayback());
+            StartPlayback();
         }
         else
         {
@@ -227,23 +234,21 @@ public class RhythmTracker : MonoBehaviour {
     private IEnumerator PlayDelayedByFrame()
     {
         yield return new WaitForEndOfFrame();
-        StartCoroutine(StartPlayback());
+        StartPlayback();
     }
-    private IEnumerator StartPlayback()
+    private void StartPlayback()
     {
         // If an offset is desired, start the pre-roll audiosource's playback and delay main playback by that offset.
         if (m_OffsetAudioSource != null)
         {
-            m_OffsetAudioSource.Play();
-            yield return new WaitForSecondsRealtime(m_AdvancedNotificationOffset);
+            m_OffsetAudioSource.PlayDelayed(m_PrerollTime);
         }
         if (m_PlaybackAudioSource != null)
         {
-            m_PlaybackAudioSource.Play();
+            m_PlaybackAudioSource.PlayDelayed(m_AdvancedNotificationOffset);
         }
         // Play main loop audiosource
-        m_LoopAudioSource.Play();
-        yield return null;
+        m_LoopAudioSource.PlayDelayed(m_AdvancedNotificationOffset + m_PrerollTime);
     }
 
 

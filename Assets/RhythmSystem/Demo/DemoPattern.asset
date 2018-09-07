@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6997fecceceae8141a33624dc0ece5e5, type: 3}
+  m_Name: DemoPattern
+  m_EditorClassIdentifier: 
+  rows: 2
+  steps: 16
+  offset: 0
+  timing: 1
+  events:
+  - side: 6
+    hand: 0
+    hitIndex: 0
+    position: {x: 0.208, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: 2
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 3
+    position: {x: 0.299, y: 0.434}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 5
+    position: {x: 0.5, y: 0.361}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 7
+    position: {x: 0.347, y: 0.661}
+  - side: 0
+    hand: 0
+    hitIndex: 8
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 9
+    position: {x: 0.208, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 14
+    position: {x: 0.31, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 15
+    position: {x: 0.69, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 1
+    position: {x: 0.777, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 4
+    position: {x: 0.704, y: 0.332}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 7
+    position: {x: 0.668, y: 0.66}
+  - side: 6
+    hand: 1
+    hitIndex: 8
+    position: {x: 0.802, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 11
+    position: {x: 0.675, y: 0.42}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 14
+    position: {x: 0.668, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 15
+    position: {x: 0.332, y: 0.5}
