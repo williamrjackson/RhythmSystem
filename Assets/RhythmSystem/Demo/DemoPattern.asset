@@ -12,50 +12,90 @@ MonoBehaviour:
   m_Name: DemoPattern
   m_EditorClassIdentifier: 
   rows: 2
-  steps: 16
+  steps: 32
   offset: 0
-  timing: 1
+  timing: 0
   events:
   - side: 6
     hand: 0
     hitIndex: 0
-    position: {x: 0.208, y: 0.5}
+    position: {x: 0.259, y: 0.5}
   - side: 0
     hand: 0
     hitIndex: -1
     position: {x: 0.5, y: 0.5}
   - side: 0
     hand: 0
-    hitIndex: 2
+    hitIndex: -1
     position: {x: 0.5, y: 0.5}
-  - side: 6
+  - side: 0
     hand: 0
-    hitIndex: 3
-    position: {x: 0.299, y: 0.434}
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
   - side: 0
     hand: 0
     hitIndex: -1
     position: {x: 0.5, y: 0.5}
   - side: 6
-    hand: 0
-    hitIndex: 5
-    position: {x: 0.5, y: 0.361}
-  - side: 0
-    hand: 0
-    hitIndex: -1
-    position: {x: 0.5, y: 0.5}
-  - side: 6
-    hand: 0
-    hitIndex: 7
-    position: {x: 0.347, y: 0.661}
-  - side: 0
     hand: 0
     hitIndex: 8
+    position: {x: 0.369, y: 0.372}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
     position: {x: 0.5, y: 0.5}
   - side: 6
     hand: 0
-    hitIndex: 9
-    position: {x: 0.208, y: 0.5}
+    hitIndex: 16
+    position: {x: 0.266, y: 0.434}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 0
+    hitIndex: 19
+    position: {x: 0.376, y: 0.303}
   - side: 0
     hand: 0
     hitIndex: -1
@@ -74,20 +114,44 @@ MonoBehaviour:
     position: {x: 0.5, y: 0.5}
   - side: 6
     hand: 0
-    hitIndex: 14
-    position: {x: 0.31, y: 0.5}
+    hitIndex: 24
+    position: {x: 0.252, y: 0.234}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
   - side: 6
     hand: 0
-    hitIndex: 15
-    position: {x: 0.69, y: 0.5}
+    hitIndex: 28
+    position: {x: 0.343, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 0
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
   - side: 0
     hand: 1
     hitIndex: -1
     position: {x: 0.5, y: 0.5}
-  - side: 6
+  - side: 0
     hand: 1
-    hitIndex: 1
-    position: {x: 0.777, y: 0.5}
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
   - side: 0
     hand: 1
     hitIndex: -1
@@ -99,7 +163,7 @@ MonoBehaviour:
   - side: 6
     hand: 1
     hitIndex: 4
-    position: {x: 0.704, y: 0.332}
+    position: {x: 0.763, y: 0.5}
   - side: 0
     hand: 1
     hitIndex: -1
@@ -108,14 +172,6 @@ MonoBehaviour:
     hand: 1
     hitIndex: -1
     position: {x: 0.5, y: 0.5}
-  - side: 6
-    hand: 1
-    hitIndex: 7
-    position: {x: 0.668, y: 0.66}
-  - side: 6
-    hand: 1
-    hitIndex: 8
-    position: {x: 0.802, y: 0.5}
   - side: 0
     hand: 1
     hitIndex: -1
@@ -124,10 +180,10 @@ MonoBehaviour:
     hand: 1
     hitIndex: -1
     position: {x: 0.5, y: 0.5}
-  - side: 6
+  - side: 0
     hand: 1
-    hitIndex: 11
-    position: {x: 0.675, y: 0.42}
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
   - side: 0
     hand: 1
     hitIndex: -1
@@ -138,9 +194,81 @@ MonoBehaviour:
     position: {x: 0.5, y: 0.5}
   - side: 6
     hand: 1
-    hitIndex: 14
-    position: {x: 0.668, y: 0.5}
+    hitIndex: 12
+    position: {x: 0.639, y: 0.347}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
   - side: 6
     hand: 1
-    hitIndex: 15
-    position: {x: 0.332, y: 0.5}
+    hitIndex: 20
+    position: {x: 0.631, y: 0.182}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 25
+    position: {x: 0.704, y: 0.274}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 27
+    position: {x: 0.65, y: 0.277}
+  - side: 0
+    hand: 1
+    hitIndex: 28
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 0
+    hand: 1
+    hitIndex: -1
+    position: {x: 0.5, y: 0.5}
+  - side: 6
+    hand: 1
+    hitIndex: 31
+    position: {x: 0.741, y: 0.5}

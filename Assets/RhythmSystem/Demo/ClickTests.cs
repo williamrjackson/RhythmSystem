@@ -23,7 +23,7 @@ public class ClickTests : MonoBehaviour {
         count++;
         foreach(RhythmPatternEvent e in pattern.events)
         {
-            if (e.hitIndex == count % 16 && e.side != RhythmPatternEvent.Side.None)
+            if (e.hitIndex == count % pattern.steps && e.side != RhythmPatternEvent.Side.None)
                 StartCoroutine(SpawnAndMoveAndDestroy(e));
         }
     }
