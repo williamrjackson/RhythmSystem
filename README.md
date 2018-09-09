@@ -24,4 +24,5 @@ public class Test : MonoBehaviour
 
 You can also set on offset, to get advance notifications of beats, in addition to the beats themselves.
 
-![sample](RhythmExample.gif)
+![sample](RhythmExample.gif)    
+![editorview](editorview.png)
