@@ -22,7 +22,7 @@ public class RhythmTracker : MonoBehaviour {
     private float m_PrerollTime = 0;
     private AudioSource m_LoopAudioSource;
     private AudioSource m_OffsetAudioSource;
-    private int m_SubDivisions = 32;
+    private int m_SubDivisions = 64;
     private List<int> m_HitList;
     private int m_NextHitIndex = 0;
     private int m_NextAdvancedHitIndex = 0;
@@ -68,13 +68,6 @@ public class RhythmTracker : MonoBehaviour {
         AudioClip silentClip = AudioClip.Create("100bpm-Silent", 423360, 1, 44100, false);
         m_LoopAudioSource.clip = silentClip;
 
-        // If PlayOnAwake is enabled, queue it up so Play() actually happens on the first frame. After everything's initialized and all subscriptions in 
-        // Start() and Awake() functions have been made. Otherwise, first beats will be intermittently skipped.
-        if (m_PlayOnAwake)
-        {
-            StartCoroutine(PlayDelayedByFrame());
-        }
-
         // If we're providing forewarnings on an offset, create a new child object with a
         // similarly set up audio source. This one will start right away, while the other will
         // start on after the offset time has passed.
@@ -88,6 +81,7 @@ public class RhythmTracker : MonoBehaviour {
             m_OffsetAudioSource.clip = m_LoopAudioSource.clip;
             m_OffsetAudioSource.volume = 0;
         }
+
         // Initialize list of target samples
         m_HitList = new List<int>();
         // Fill list with the the samples that represent target downbeats.
@@ -95,7 +89,17 @@ public class RhythmTracker : MonoBehaviour {
         {
             m_HitList.Add(m_LoopAudioSource.clip.samples / m_SubDivisions * i);
         }
+
+        // Apply the tempo specified in the inspector.
         SetTempo(m_InitialTempo);
+
+        // If PlayOnAwake is enabled, queue it up so Play() actually happens on the first frame. After everything's initialized and all subscriptions in 
+        // Start() and Awake() functions have been made. Otherwise, first beats will be intermittently skipped, depending on the order of initialization.
+        if (m_PlayOnAwake)
+        {
+            StartCoroutine(PlayDelayedByFrame());
+        }
+
     }
 
 	void Update ()

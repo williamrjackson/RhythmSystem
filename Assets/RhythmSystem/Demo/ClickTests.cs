@@ -35,6 +35,25 @@ public class ClickTests : MonoBehaviour {
         GameObject instantiatePrefab = e.hand == RhythmPatternEvent.Hand.Right ? rightPrefab : leftPrefab;
         GameObject go = Instantiate(instantiatePrefab);
         go.transform.parent = transform;
+        switch (e.side)
+        {
+            case RhythmPatternEvent.Side.Any:
+                int RandomDir = UnityEngine.Random.Range(0, 2);
+                float rotation = -90;
+                if (RandomDir == 1)
+                    rotation = 90;
+                go.transform.Rotate(go.transform.forward, rotation);
+                break;
+            case RhythmPatternEvent.Side.Right:
+                go.transform.Rotate(go.transform.forward, -90);
+                break;
+            case RhythmPatternEvent.Side.Bottom:
+                go.transform.Rotate(go.transform.forward, 180);
+                break;
+            case RhythmPatternEvent.Side.Left:
+                go.transform.Rotate(go.transform.forward, 90);
+                break;
+        }
         Vector3 targetPos = Vector3.zero  + Vector3.right * x;
         float offset = RhythmTracker.instance.GetOffset();
         float elapsedTime = 0;
