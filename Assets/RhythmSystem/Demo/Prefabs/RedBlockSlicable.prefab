@@ -331,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 1988550456010020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4699492300581888}
   - {fileID: 4240945198902228}
@@ -820,6 +820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainChild: {fileID: 1209974904468164}
   sliceChild: {fileID: 1295608954046900}
+  testSlice: 0
 --- !u!114 &114302336680438902
 MonoBehaviour:
   m_ObjectHideFlags: 1

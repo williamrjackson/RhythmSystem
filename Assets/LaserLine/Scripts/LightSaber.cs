@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightSaber : MonoBehaviour {
     public float length = 3;
     public float speed = .15f;
+    public Transform followTransform;
     public LaserLine line;
     public Transform tip;
     public ParticleSystem particles;
@@ -19,6 +20,8 @@ public class LightSaber : MonoBehaviour {
     }
 
     void LateUpdate () {
+        transform.position = followTransform.position;
+        transform.rotation = followTransform.rotation;
         line.SetPosition(0, transform.position);
         line.SetPosition(1, tip.position);
     }

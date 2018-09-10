@@ -30,8 +30,8 @@ public class ClickTests : MonoBehaviour {
 
     private IEnumerator SpawnAndMoveAndDestroy(RhythmPatternEvent e)
     {
-        float x = Mathf.Lerp(-5, 5, e.position.x);
-        float y = Mathf.Lerp(5, 0, e.position.y);
+        float x = Mathf.Lerp(-1.5f, 1.5f, e.position.x);
+        float y = Mathf.Lerp(2.5f, 0, e.position.y);
         GameObject instantiatePrefab = e.hand == RhythmPatternEvent.Hand.Right ? rightPrefab : leftPrefab;
         GameObject go = Instantiate(instantiatePrefab);
         go.transform.parent = transform;
@@ -62,7 +62,7 @@ public class ClickTests : MonoBehaviour {
             float t = Mathf.InverseLerp(0, offset, elapsedTime);
             float inverseT = Mathf.InverseLerp(offset, 0, elapsedTime);
             Vector3 currentPos = targetPos + Vector3.up * y * curve.Evaluate(t) + 
-                Vector3.forward * 40 * inverseT;
+                Vector3.forward * 30 * inverseT;
             go.transform.position = currentPos;
             elapsedTime += Time.unscaledDeltaTime;
             yield return new WaitForEndOfFrame();
