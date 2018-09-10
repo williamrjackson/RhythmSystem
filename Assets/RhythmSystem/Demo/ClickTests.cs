@@ -57,13 +57,19 @@ public class ClickTests : MonoBehaviour {
         Vector3 targetPos = Vector3.zero  + Vector3.right * x;
         float offset = RhythmTracker.instance.GetOffset();
         float elapsedTime = 0;
-        while (elapsedTime < offset)
+        while (elapsedTime <= offset)
         {
             float t = Mathf.InverseLerp(0, offset, elapsedTime);
             float inverseT = Mathf.InverseLerp(offset, 0, elapsedTime);
             Vector3 currentPos = targetPos + Vector3.up * y * curve.Evaluate(t) + 
                 Vector3.forward * 40 * inverseT;
             go.transform.position = currentPos;
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        while (elapsedTime < offset + 1)
+        {
+            go.transform.position = Vector3.Lerp(targetPos + Vector3.up * y, targetPos - Vector3.forward * 10, Mathf.InverseLerp(offset, offset + 1, elapsedTime));
             elapsedTime += Time.unscaledDeltaTime;
             yield return new WaitForEndOfFrame();
         }
