@@ -26,4 +26,4 @@ You can also set on offset, to get advance notifications of beats, in addition t
 
 ![sample](RhythmExample.gif)  
 
-![stepsequencer](StepSeq.png)
+![stepsequencer](StepSeq.PNG)
