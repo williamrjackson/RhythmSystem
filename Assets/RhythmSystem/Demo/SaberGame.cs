@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 
-public class ClickTests : MonoBehaviour {
+public class SaberGame : MonoBehaviour {
     public GameObject rightPrefab;
     public GameObject leftPrefab;
     public RhythmPattern pattern;
