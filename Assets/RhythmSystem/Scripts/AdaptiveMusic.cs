@@ -17,7 +17,11 @@ public class AdaptiveMusic : MonoBehaviour {
     {
         // Requires more than one loop
         if (m_Loops.Length < 2)
+        {
+            Debug.LogError("AdaptiveMusic requires at least 2 audio loops. Disabling component");
+            enabled = false;
             return;
+        }
 
         // Determine the width each loop occupies
         m_RangePerSection = 1f / (m_Loops.Length - 1);
