@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04d46660242c174a9015d14adb07686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 0
-  loops:
+  m_Intensity: 0
+  m_Loops:
   - clip: {fileID: 8300000, guid: 2d3c50d7e2bea834eae36f87d277d49a, type: 3}
-    additive: 1
+    additive: 0
     startDegree: 0
     maxDegree: 0
     endDegree: 0
@@ -210,8 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04d46660242c174a9015d14adb07686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 0
-  loops:
+  m_Intensity: 0
+  m_Loops:
   - clip: {fileID: 8300000, guid: 394dc93e199fa6b4380193e5d30c96c8, type: 3}
     additive: 1
     startDegree: 0

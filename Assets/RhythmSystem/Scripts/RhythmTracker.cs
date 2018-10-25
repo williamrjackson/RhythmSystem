@@ -172,11 +172,27 @@ public class RhythmTracker : MonoBehaviour {
         return m_AdvancedNotificationOffset;
     }
 
+    public float GetPreRoll()
+    {
+        return m_PrerollTime;
+    }
+
+    public void SetPreRoll(float preRoll)
+    {
+        m_PrerollTime = preRoll;
+    }
+
+    public AudioSource GetPlaybackAudioSource()
+    {
+        return m_PlaybackAudioSource;
+    }
+
     // Set and get tempo
     public float GetTempo()
     {
         return m_LoopAudioSource.pitch * 100;
     }
+
     public void SetTempo(float tempo)
     {
         m_LoopAudioSource.pitch = tempo / 100;
@@ -191,7 +207,7 @@ public class RhythmTracker : MonoBehaviour {
     {
         if (!m_IsPaused)
         {
-            StartPlayback();
+            StartCoroutine(PlayDelayedByFrame());
         }
         else
         {
@@ -200,38 +216,35 @@ public class RhythmTracker : MonoBehaviour {
     }
     public void Stop()
     {
-        if (m_OffsetAudioSource != null && m_OffsetAudioSource.isPlaying)
+        m_IsPaused = false;
+        if (m_OffsetAudioSource != null)
             m_OffsetAudioSource.Stop();
-        if (m_PlaybackAudioSource != null && m_PlaybackAudioSource.isPlaying)
+        if (m_PlaybackAudioSource != null)
             m_PlaybackAudioSource.Stop();
-        if (m_LoopAudioSource.isPlaying)
+        if (m_LoopAudioSource != null)
             m_LoopAudioSource.Stop();
     }
-    public bool Pause()
+    public void Pause()
     {
-        if (m_AdvancedNotificationOffset > 0 && !m_LoopAudioSource.isPlaying)
-        {
-            Debug.LogError("Cannot pause before offset is completed");
-            return false;
-        }
-        if (m_OffsetAudioSource != null && m_OffsetAudioSource.isPlaying)
-            m_OffsetAudioSource.Pause();
-        if (m_PlaybackAudioSource != null && m_PlaybackAudioSource.isPlaying)
-            m_PlaybackAudioSource.Pause();
-        if (m_LoopAudioSource.isPlaying)
-            m_LoopAudioSource.Pause();
-        m_IsPaused = true;
-        return true;
+        StartCoroutine(PauseAsSoonAsPossible());
     }
     public void UnPause()
     {
-        if (m_OffsetAudioSource != null && !m_OffsetAudioSource.isPlaying)
-            m_OffsetAudioSource.UnPause();
-        if (m_PlaybackAudioSource != null && !m_PlaybackAudioSource.isPlaying)
-            m_PlaybackAudioSource.UnPause();
-        if (!m_LoopAudioSource.isPlaying)
-            m_LoopAudioSource.UnPause();
+        if (!m_IsPaused)
+            return;
+
         m_IsPaused = false;
+        if (m_OffsetAudioSource != null)
+            m_OffsetAudioSource.UnPause();
+        if (m_PlaybackAudioSource != null)
+            m_PlaybackAudioSource.UnPause();
+        if (m_LoopAudioSource != null)
+            m_LoopAudioSource.UnPause();
+    }
+
+    public bool IsPaused()
+    {
+        return m_IsPaused;
     }
 
     // Wait til everything is fully initialized before playback begins... We don't want samples running before we have a chance to see them.
@@ -240,8 +253,36 @@ public class RhythmTracker : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         StartPlayback();
     }
+
+    private IEnumerator PauseAsSoonAsPossible()
+    {
+        m_IsPaused = true;
+        if (m_AdvancedNotificationOffset > 0 && !m_LoopAudioSource.isPlaying)
+        {
+            // Wait until the advanced notification offset has elapsed.
+            while (!m_LoopAudioSource.isPlaying)
+            {
+                // If playback is stopped (or something else happens to the state) while we're waiting, break.
+                if (!m_IsPaused)
+                    yield break;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        // Pause all relevant audio sources.
+        if (m_OffsetAudioSource != null && m_OffsetAudioSource.isPlaying)
+            m_OffsetAudioSource.Pause();
+        if (m_PlaybackAudioSource != null && m_PlaybackAudioSource.isPlaying)
+            m_PlaybackAudioSource.Pause();
+        if (m_LoopAudioSource.isPlaying)
+            m_LoopAudioSource.Pause();
+    }
+
     private void StartPlayback()
     {
+        m_IsPaused = false;
+        m_NextHitIndex = 0;
+        m_NextAdvancedHitIndex = 0;
+
         // If an offset is desired, start the pre-roll audiosource's playback and delay main playback by that offset.
         if (m_OffsetAudioSource != null)
         {
@@ -406,5 +447,21 @@ public class RhythmTracker : MonoBehaviour {
                 }
             }
         }
+    }
+    // Unsubscribes method from unknown. 
+    public void Unsubscribe(OnBeatDelegate subscriber)
+    {
+        OnAdvanced32nd -= subscriber;
+        OnAdvanced16th -= subscriber;
+        OnAdvanced8th -= subscriber;
+        OnAdvancedQuarter -= subscriber;
+        OnAdvancedHalf -= subscriber;
+        OnAdvancedWhole -= subscriber;
+        On32nd -= subscriber;
+        On16th -= subscriber;
+        On8th -= subscriber;
+        OnQuarter -= subscriber;
+        OnHalf -= subscriber;
+        OnWhole -= subscriber;
     }
 }
