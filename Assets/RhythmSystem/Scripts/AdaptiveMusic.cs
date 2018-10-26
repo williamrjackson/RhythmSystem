@@ -15,6 +15,7 @@ public class AdaptiveMusic : MonoBehaviour {
 
     void Start ()
     {
+        double audioStartTime = AudioSettings.dspTime + .5;
         // Requires more than one loop
         if (m_Loops.Length < 2)
         {
@@ -23,7 +24,7 @@ public class AdaptiveMusic : MonoBehaviour {
             return;
         }
 
-        // Determine the width each loop occupies
+        // Determine the range each loop occupies
         m_RangePerSection = 1f / (m_Loops.Length - 1);
 
         // For each loop, set a position for fade in begin, max volume, and fade out complete.
@@ -37,11 +38,11 @@ public class AdaptiveMusic : MonoBehaviour {
             m_Loops[i].audioSrc.clip = m_Loops[i].clip;
             m_Loops[i].audioSrc.loop = true;
             m_Loops[i].audioSrc.playOnAwake = false;
-            // First loop special handling... Start at volume 1, provide no fade in phase
+            // First loop special handling... Start at volume 1, provide negative (out of range/inaccessible) fade in phase
             if (i == 0)
             {
                 m_Loops[i].audioSrc.volume = 1f;
-                m_Loops[i].fadeInBegin = -.01f;
+                m_Loops[i].fadeInBegin = -m_RangePerSection;
                 m_Loops[i].maxVolPos = 0f;
                 m_Loops[i].fadeOutEnd = m_RangePerSection;
             }
@@ -49,16 +50,15 @@ public class AdaptiveMusic : MonoBehaviour {
             else
             {
                 m_Loops[i].audioSrc.volume = 0f;
-                // Set the fade-in-start position to the previous max position (fade-out-start)
+                // Set the fade-in-start position to the previous max-vol/fade-out-start position
                 m_Loops[i].fadeInBegin = m_Loops[i - 1].maxVolPos;
-                // Set the max-volposition to the previous fade-out-end, resulting in a linear crossfade
+                // Set the max-vol position to the previous fade-out-end, resulting in a linear crossfade
                 m_Loops[i].maxVolPos = m_Loops[i - 1].fadeOutEnd;
-                // Add fade out range. Note: for the last loop, this overflows to > 1, making in inaccessible (by design)
+                // Add fade out range. Note: for the last loop this overflows to > 1, making in inaccessible (by design)
                 m_Loops[i].fadeOutEnd = m_Loops[i].maxVolPos + m_RangePerSection;
             }
-            // Start the loop
-            // TODO: Replace this with PlayScheduled for guarenteed sample accurate sync? Doesn't seem to be necessary so far.
-            m_Loops[i].audioSrc.Play();
+            // Start the loop (scheduled to ensure sample-accurate sync)
+            m_Loops[i].audioSrc.PlayScheduled(audioStartTime);
         }
 	}
 	

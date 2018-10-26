@@ -1460,6 +1460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tempo: {fileID: 118456624}
   swing: {fileID: 665406264}
+  buffer: 0.1
   rowClips:
   - {fileID: 8300000, guid: eab07130160ac2e468e44d8c924b71d5, type: 3}
   - {fileID: 8300000, guid: b93f7d01a0b5b8b43b0fe25c445f5194, type: 3}
