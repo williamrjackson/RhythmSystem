@@ -22,7 +22,7 @@ public class Test : MonoBehaviour
 }
 ```
 
-You can also set on offset, to get advance notifications of beats, in addition to the beats themselves.
+You can also set an offset, to get advance notifications of beats, in addition to the beats themselves.
 
 Note: While the RhythmTracker notifications are quite accurate, triggering clips with `AudioSource.Play()` or `AudioSource.PlayOneShot()` (as in the step sequencer demo scene) sounds pretty loose. I believe this is because there's an unpredictable delay between calling them and actually hearing the result. I plan to experiment with building a helper utility that features a buffer and uses `AudioSource.PlayScheduled()` to work aronud this issue. 
 
