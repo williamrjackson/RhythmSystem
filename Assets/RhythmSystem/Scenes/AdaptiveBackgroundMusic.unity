@@ -144,31 +144,35 @@ MonoBehaviour:
   m_Loops:
   - clip: {fileID: 8300000, guid: 2d3c50d7e2bea834eae36f87d277d49a, type: 3}
     additive: 0
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
   - clip: {fileID: 8300000, guid: 92448b7059271fc48a17869fff87114a, type: 3}
     additive: 0
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
   - clip: {fileID: 8300000, guid: 7de9d69ad2403d24aa9426488275bb72, type: 3}
-    additive: 0
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    additive: 1
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
   - clip: {fileID: 8300000, guid: c67c88f431ebb8f43b793e3bafd0ced5, type: 3}
     additive: 0
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
 --- !u!4 &179448223
 Transform:
@@ -214,31 +218,35 @@ MonoBehaviour:
   m_Loops:
   - clip: {fileID: 8300000, guid: 394dc93e199fa6b4380193e5d30c96c8, type: 3}
     additive: 1
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
   - clip: {fileID: 8300000, guid: 1292dd4616132764eb3223031720bd45, type: 3}
     additive: 1
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
   - clip: {fileID: 8300000, guid: 277ba779571236147b17136a90bd7e06, type: 3}
     additive: 1
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
   - clip: {fileID: 8300000, guid: c8ace6fa19377184a8efeacb3661fb49, type: 3}
     additive: 1
-    startDegree: 0
-    maxDegree: 0
-    endDegree: 0
+    fadeInBegin: 0
+    maxVolPos: 0
+    fadeOutEnd: 0
     smoothVel: 0
+    targetVol: 0
     audioSrc: {fileID: 0}
 --- !u!4 &653295467
 Transform:

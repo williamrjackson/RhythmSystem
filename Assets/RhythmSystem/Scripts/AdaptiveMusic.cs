@@ -12,6 +12,7 @@ public class AdaptiveMusic : MonoBehaviour {
 
     private float m_SmoothTime = 25f;
     private float m_RangePerSection;
+    private float m_LastAppliedIntensity = -1;
 
     void Start ()
     {
@@ -64,31 +65,38 @@ public class AdaptiveMusic : MonoBehaviour {
 	
 	void Update ()
     {
+        // If we've already calculated for the current intensity value, don't bother doing it again on this update.
+        bool bRefreshTargetVols = (m_Intensity != m_LastAppliedIntensity);
         foreach (AdaptiveLoop al in m_Loops) 
         {
-            // default to silent
-            float vol = 0;
-            // If intensity is in range (or above on an additive loop), we may need to manipulate it's volume. 
-            // Otherwise, keep the value at 0, to silence it.
-            if (m_Intensity >= al.fadeInBegin && (m_Intensity <= al.fadeOutEnd || al.additive))
+            if (bRefreshTargetVols)
             {
-                // change default to 1, since there's a chance it won't meet either of the following conditions, suggesting 
-                // that it's addititive
-                vol = 1;
-                // If intensity's in range, but below the max vol position, set the loops volume to the relative position between fade in begin, and max. 
-                if (m_Intensity <= al.maxVolPos)
+                // default to silent
+                float vol = 0;
+                // If intensity is in range (or above on an additive loop), we may need to manipulate it's volume. 
+                // Otherwise, keep the value at 0, to silence it.
+                if (m_Intensity >= al.fadeInBegin && (m_Intensity <= al.fadeOutEnd || al.additive))
                 {
-                    vol = Mathf.InverseLerp(al.fadeInBegin, al.maxVolPos, m_Intensity);
+                    // change default to 1, since there's a chance it won't meet either of the following conditions, suggesting 
+                    // that it's addititive
+                    vol = 1;
+                    // If intensity's in range, but below the max vol position, set the loops volume to the relative position between fade in begin, and max. 
+                    if (m_Intensity <= al.maxVolPos)
+                    {
+                        vol = Mathf.InverseLerp(al.fadeInBegin, al.maxVolPos, m_Intensity);
+                    }
+                    // If intensity's in range, but above the max vol position, set the loops volume to the relative position between fade in begin, and max.
+                    // Unless it's additive, in which case we don't fade it out. Keep vol=1; 
+                    else if (!al.additive)
+                    {
+                        vol = Mathf.InverseLerp(al.fadeOutEnd, al.maxVolPos, m_Intensity);
+                    }
                 }
-                // If intensity's in range, but above the max vol position, set the loops volume to the relative position between fade in begin, and max.
-                // Unless it's additive, in which case we don't fade it out. Keep vol=1; 
-                else if (!al.additive)
-                {
-                    vol = Mathf.InverseLerp(al.fadeOutEnd, al.maxVolPos, m_Intensity);
-                }
+                m_LastAppliedIntensity = m_Intensity;
+                al.targetVol = vol;
             }
             // Smooth to avoid jarring changes.
-            al.audioSrc.volume = Mathf.SmoothDamp(al.audioSrc.volume, vol, ref al.smoothVel, m_SmoothTime * Time.deltaTime);
+            al.audioSrc.volume = Mathf.SmoothDamp(al.audioSrc.volume, al.targetVol, ref al.smoothVel, m_SmoothTime * Time.deltaTime);
         }
     }
 
@@ -136,6 +144,8 @@ public class AdaptiveMusic : MonoBehaviour {
         public float fadeOutEnd;
         [HideInInspector]
         public float smoothVel = 0;
+        [HideInInspector]
+        public float targetVol = 0;
         [HideInInspector]
         public AudioSource audioSrc;
     }
